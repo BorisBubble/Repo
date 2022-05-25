@@ -1,20 +1,26 @@
-﻿using System;
+﻿using ConsoleApp1.Objects;
+using System;
 
 namespace ConsoleApp1
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
 
+            
+            var userManager = new userManager();
+            var user =  userManager.BuildUser();
 
+           
+            int width = ConsoleHelper.ReadInt($"Enter width maze {name.FullName()}");
+            int height = ConsoleHelper.ReadInt($"Enter height maze {name.FullName()}");
 
-            Console.WriteLine("Hello World!");
-
-
+            var maze = new Maze(width, height);
 
 
         }
+
+
     }
 }
