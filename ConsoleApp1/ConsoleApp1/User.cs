@@ -5,7 +5,30 @@ namespace ConsoleApp1
     class User
     {
         public string Name;
-        public int Age;
+
+        private int _age;
+        public int Age
+        {
+            get
+            {
+                return _age;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    _age = value;
+                }
+            }
+        }
+        public bool CanDrink
+        {
+            get
+            {
+                return Age > 18;
+            }
+
+        }
 
         /// <summary>
         /// Возраст будет установлен в 18 лет.
@@ -43,7 +66,7 @@ namespace ConsoleApp1
 
         public string FullName()
         {
-            return $"Greate, {Name}";
+            return $"Greate, {Name}"; //$"Greate, Boris"
         }
     }
 

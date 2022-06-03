@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleApp1
 {
-    internal class userManager
+    internal class UserManager
     {
         public User BuildUser()
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleApp1
+namespace HomeWork1
 {
     internal class ConsoleHelper
     {
@@ -10,8 +10,7 @@ namespace ConsoleApp1
         {
             Console.WriteLine(message);
             string str = Console.ReadLine();
-            int number = int.Parse(str);
-            return number;
+            return int.Parse(str);
         }
     }
 }

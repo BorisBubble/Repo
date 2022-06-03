@@ -1,5 +1,8 @@
 ﻿using ConsoleApp1.Objects;
+using ConsoleApp1.Objects.Labyrinth;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleApp1
 {
@@ -7,20 +10,20 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-
-            
-            var userManager = new userManager();
-            var user =  userManager.BuildUser();
-
            
+            var userManager = new UserManager();
+            var user = userManager.BuildUser();
+            if (user == null)
+            {
+                return;
+            }
+
             int width = ConsoleHelper.ReadInt($"Enter width maze {user.FullName()}");
             int height = ConsoleHelper.ReadInt($"Enter height maze {user.FullName()}");
 
-            var maze = new Maze(width, height);
+            var generator = new MazeGenerator();
+            var maze = generator.Generate(width, height);
             Drawer.Draw(maze);
-
         }
-
-
     }
 }
