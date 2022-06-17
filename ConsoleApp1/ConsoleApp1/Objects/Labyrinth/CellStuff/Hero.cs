@@ -4,14 +4,12 @@ using System.Text;
 
 namespace ConsoleApp1.Objects.Labyrinth.CellStuff
 {
-    public class Wall : BaseCell
-    {
-        //public int X;
-        //public int Y;
-        //public char Symbol;
-        public Wall(int x, int y) : base(x, y,'#')
-        {
+    public class Hero : BaseCell
 
+    {
+        public int Gold { get; set; }
+        public Hero(int x, int y) : base(x, y, '@')
+        {
         }
 
         public override bool TryToStep(Maze maze)

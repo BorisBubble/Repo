@@ -4,19 +4,17 @@ using System.Text;
 
 namespace ConsoleApp1.Objects.Labyrinth.CellStuff
 {
-    public class Wall : BaseCell
+    internal class Coin : BaseCell
     {
-        //public int X;
-        //public int Y;
-        //public char Symbol;
-        public Wall(int x, int y) : base(x, y,'#')
+        public Coin(int x, int y) : base(x, y, 'c')
         {
-
         }
 
         public override bool TryToStep(Maze maze)
         {
-            return false;
+            maze.Hero.Gold++;
+            maze.ReplaceCellByGround(this);
+            return true;
         }
     }
 }

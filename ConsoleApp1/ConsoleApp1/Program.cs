@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-           
+
             var userManager = new UserManager();
             var user = userManager.BuildUser();
             if (user == null)
@@ -23,7 +23,8 @@ namespace ConsoleApp1
 
             var generator = new MazeGenerator();
             var maze = generator.Generate(width, height);
-            Drawer.Draw(maze);
+            userManager.GoMaze(maze);
+            }
         }
     }
-}
+

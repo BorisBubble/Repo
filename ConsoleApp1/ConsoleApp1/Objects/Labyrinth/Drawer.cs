@@ -9,13 +9,15 @@ namespace ConsoleApp1
     {
         public static void Draw(Maze maze)
         {
+            Console.Clear();
+            Console.WriteLine($"Hero has {maze.Hero.Gold} coins");
             for (int y = 0; y < maze.Height; y++)
             {
                 Console.WriteLine();
                 Console.Write($"{y}");
                 for (int x = 0; x < maze.Width; x++)
                 {
-                    var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
+                    var cell = maze.CellsWithHero.Single(cell => cell.X == x && cell.Y == y);
                     Console.Write(cell.Symbol);
                 }
             }

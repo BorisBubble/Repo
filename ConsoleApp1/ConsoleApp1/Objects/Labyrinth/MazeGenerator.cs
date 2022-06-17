@@ -13,25 +13,26 @@ namespace ConsoleApp1.Objects.Labyrinth
         public Maze Generate(int width, int height)
         {
             _maze = new Maze(width, height);
+            _maze.Hero = new Hero(0, 0);
+
 
             FillMazeWitWall();
 
             GenerateGrounds();
 
+            GenerateWell();
+
             GenerateCoin();
 
-            GenerateDollar();
-
+            
             return _maze;
         }
-        private void GenerateDollar()
-        {
-            var c = _maze.Cells.Single(x => x.X == 0 && x.Y == 0);
-            _maze.Cells.Remove(c);
-            var dollar = new Dollar(c.X, c.Y);
-            _maze.Cells.Add(dollar);
-        }
         private void GenerateCoin()
+        {
+            var coin = new Coin(1, 1);
+            _maze.ReplaceCellByNewCell(coin);
+        }
+        private void GenerateWell()
         {
             var c = _maze.Cells.Single(x => x.X == _maze.Width - 1 && x.Y == 0);
             _maze.Cells.Remove(c);
@@ -41,11 +42,11 @@ namespace ConsoleApp1.Objects.Labyrinth
         private void GenerateGrounds()
         {
             var workCell = _maze.Cells.First();
-            var redWall = new List<Cell>();
+            var redWall = new List<BaseCell>();
 
             do
             {
-                ReplaceCellByGround(workCell);
+                _maze.ReplaceCellByGround(workCell);
                 var nearWall = GetNear(workCell, _maze).OfType<Wall>();
                 redWall.AddRange(nearWall);
                 redWall = RemoveWallToAvoidCycle(redWall);
@@ -53,18 +54,13 @@ namespace ConsoleApp1.Objects.Labyrinth
                 redWall.Remove(workCell);
             } while (redWall.Any());
         }
-        private List<Cell> RemoveWallToAvoidCycle(List<Cell> cells)
+        private List<BaseCell> RemoveWallToAvoidCycle(List<BaseCell> cells)
         {
             return cells.Where(red =>
                     GetNear(red, _maze).OfType<Ground>().Count() <= 1)
                     .ToList();
     }
-        private void ReplaceCellByGround(Cell cell)
-        {
-            _maze.Cells.Remove(cell);
-            var ground = new Ground(cell.X, cell.Y);
-            _maze.Cells.Add(ground);
-        }
+        
         private void FillMazeWitWall()
         {
             for (int y = 0; y < _maze.Height; y++)
@@ -76,7 +72,7 @@ namespace ConsoleApp1.Objects.Labyrinth
                 }
             }
         }
-        private List<Cell> GetNear(Cell targetCell, Maze maze)
+        private List<BaseCell> GetNear(BaseCell targetCell, Maze maze)
         {
             return maze.Cells.Where(cell =>
                 cell.X == targetCell.X && cell.Y == targetCell.Y - 1
@@ -85,7 +81,7 @@ namespace ConsoleApp1.Objects.Labyrinth
                 || cell.X == targetCell.X + 1 && cell.Y == targetCell.Y)
                 .ToList();
         }
-        private Cell GetRandom(List<Cell> cells)
+        private BaseCell GetRandom(List<BaseCell> cells)
         {
             var random = new Random();
             var index = random.Next(cells.Count);
