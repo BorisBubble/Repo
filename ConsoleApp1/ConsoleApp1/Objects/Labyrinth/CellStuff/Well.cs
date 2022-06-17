@@ -13,6 +13,7 @@ namespace ConsoleApp1.Objects.Labyrinth.CellStuff
 
         public override bool TryToStep(Maze maze)
         {
+            maze.Hero.Water++;
             return true ;
         }
     }

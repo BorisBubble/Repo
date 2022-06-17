@@ -11,6 +11,7 @@ namespace ConsoleApp1
         {
             Console.Clear();
             Console.WriteLine($"Hero has {maze.Hero.Gold} coins");
+            Console.WriteLine($"Hero has {maze.Hero.Water} water");
             for (int y = 0; y < maze.Height; y++)
             {
                 Console.WriteLine();

@@ -8,6 +8,7 @@ namespace ConsoleApp1.Objects.Labyrinth.CellStuff
 
     {
         public int Gold { get; set; }
+        public int Water { get; set; }
         public Hero(int x, int y) : base(x, y, '@')
         {
         }
